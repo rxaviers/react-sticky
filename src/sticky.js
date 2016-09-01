@@ -80,6 +80,10 @@ export default class Sticky extends React.Component {
     const fromTop = this.getDistanceFromTop();
     const fromBottom = this.getDistanceFromBottom();
 
+    if (!this.state.containerOffset) {
+      this.channel.update();
+    }
+
     const topBreakpoint = this.state.containerOffset - this.props.topOffset;
     const bottomBreakpoint = this.state.containerOffset + this.props.bottomOffset;
 
