@@ -22,14 +22,19 @@
   const { StickyContainer, Sticky } = ReactSticky;
 
   class Timeline extends React.Component {
+    componentWillMount() {
+      this.setState({});
+    }
+
     render() {
+      let {showYears} = this.state;
       let timeline = [2000, 2010].map((decade) => {
         return (
           <StickyContainer style={{zIndex: 4}}>
             <Sticky style={{zIndex: 3}}>
               <h2>{decade}s</h2>
             </Sticky>
-            { _.range(0,10).map((i) => {
+            { showYears && _.range(0,10).map((i) => {
               return (
                 <StickyContainer style={{zIndex: 2}}>
                   <Sticky>
@@ -46,6 +51,12 @@
                 </StickyContainer>
               );
             })  }
+            {!showYears &&
+              <div>
+                <p style={{height: '1000px'}}>Some gap</p>
+                <button onClick={() => this.setState({showYears: true})}>Show years of this decade</button>
+              </div>
+            }
           </StickyContainer>
         );
       })
